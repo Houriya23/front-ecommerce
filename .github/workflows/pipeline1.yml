@@ -1,0 +1,19 @@
+name: pipeline_1
+
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  build:
+    runs-on:
+      ubuntu-latest
+      
+    steps:
+      - name: echo hello world 
+        run: echo "Hello world !"
+
+        
+
