@@ -1,6 +1,6 @@
 name: workflow_frontend
 env:
-  API_URL=https://api.03.lebondeveloppeur.net//api
+  API_URL=https://api.03.lebondeveloppeur.net/api
 
 on:
   push:
