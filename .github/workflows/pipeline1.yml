@@ -1,4 +1,4 @@
-name: pipeline_1
+name: workflow_frontend
 
 
 on:
@@ -7,13 +7,16 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on:
-      ubuntu-latest
-      
+    
+  unit_testing_job:
+
+    runs-on: ubuntu-latest
     steps:
-      - name: echo hello world 
-        run: echo "Hello world !"
+    - name: "checkout repository"
+      uses: actions/checkout@v4
 
-        
-
+    - name: "install dependencies"
+      run: npm install
+    - name: "run code analysis"
+      run: npm run test
+  
