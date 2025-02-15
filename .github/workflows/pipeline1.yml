@@ -1,6 +1,7 @@
 name: workflow_frontend
 env:
   API_URL: https://api.03.lebondeveloppeur.net/api
+  IMAGE_NAME: front-session6
 
 on:
   push:
@@ -31,7 +32,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: "build docker image"
-      run: docker build -t houriamami/front-session6 --build-arg ${{env.API_URL}} .
+      run: docker build -t ${{ vars.DOCKERHUB_USERNAME }}/${{env.IMAGE_NAME}} --build-arg ${{env.API_URL}} .
 
     - name: "login to Docker Hub"
       uses: docker/login-action@v3
@@ -40,13 +41,13 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
     - name: "push docker image to docker hub"
-      run: docker push houriamami/front-session6
+      run: docker push ${{ vars.DOCKERHUB_USERNAME }}/${{env.IMAGE_NAME}}
 
     - name: "tag image "
-      run: docker tag houriamami/front-session6 houriamami/front-session6:${{github.run_number}}
+      run: docker tag ${{ vars.DOCKERHUB_USERNAME }}/${{env.IMAGE_NAME}} ${{ vars.DOCKERHUB_USERNAME }}/${{env.IMAGE_NAME}}:${{github.run_number}}
 
     - name: "push tagged image "
-      run: docker push houriamami/front-session6:${{github.run_number}}
+      run: docker push ${{ vars.DOCKERHUB_USERNAME }}/${{env.IMAGE_NAME}}:${{github.run_number}}
 
   deployment_job:
 
